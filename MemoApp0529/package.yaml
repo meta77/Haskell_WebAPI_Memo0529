@@ -1,0 +1,81 @@
+name:                MemoApp0529
+version:             0.1.0.0
+github:              "meta77/MemoApp0529"
+license:             BSD-3-Clause
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2025 Author name here"
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/MemoApp0529#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- scotty         # Webフレームワーク
+- aeson          # JSON処理
+- sqlite-simple  # SQLite連携
+- text           # Text型
+- wai-cors       # CORS対応
+- http-types     # HTTPステータスコード
+- mtl            # MonadIOのため
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+  exposed-modules:
+    - MemoApp0529.Core
+    - MemoApp0529.Handler
+  # GHC拡張機能は必要に応じてここに追加できます。
+  # 例えば、以下のようになります。
+  # when:
+  # - condition: false # Stack Lts 19ではghc-optionsに書くのが一般的
+  #   ghc-options:
+  #   - -XScopedTypeVariables
+  #   - -XOverloadedStrings
+  #   - -XDeriveGeneric
+
+executables:
+  MemoApp0529-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - MemoApp0529
+    - scotty      # MainでもScottyの型が必要な場合
+    - wai-cors    # Mainでミドルウェアとして使用
+    - mtl         # MainでliftIOを使用
+
+
+tests:
+  MemoApp0529-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - MemoApp0529
