@@ -36,6 +36,14 @@ data Memo = Memo {
 instance ToJSON Memo
 instance FromJSON Memo -- IDを含めて受信することは少ないが、念のため定義
 
+{-
+Haskellのデータ型 (Memoなど) は、そのままではJSONやデータベースの形式とは異なります。そのため、相互に変換するための「翻訳ルール」を定義してあげる必要があります。
+Aesonというライブラリのおかげで、deriving (Generic) と書いておけば、これだけで自動的に翻訳ルールが作られます。
+
+・ToJSON: Haskellのデータ型 (Memoなど) をJSON形式 ({"memoId":1, ...}) に変換します。
+・FromJSON: JSON形式をHaskellのデータ型に変換します。
+-}
+
 -- SQLiteからの行データをMemo型に変換
 instance FromRow Memo where
   fromRow = Memo <$> field <*> field <*> field
