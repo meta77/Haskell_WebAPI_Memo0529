@@ -85,6 +85,7 @@ dbFile :: String
 dbFile = "memoapp0529.db"
 
 -- | データベースの初期化 (テーブル作成)
+-- このアプリケーションを起動したときに、最初に一度だけ呼ばれる関数です。メモを保存するための「入れ物（テーブル）」をデータベース内に準備します。
 initDB :: IO ()
 initDB = withConnection dbFile $ \conn -> do
   execute_ conn "CREATE TABLE IF NOT EXISTS memos (\
