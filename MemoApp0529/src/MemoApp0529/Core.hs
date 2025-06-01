@@ -4,9 +4,8 @@
 メモを保存するためのデータベースとテーブルを準備する。（DB初期化）
 -}
 
-
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-} -- "ただの文字列" を、より高機能な Text 型として扱えるようにしてくれます。日本語などを扱う際に便利です。
+{-# LANGUAGE DeriveGeneric     #-} -- 後で出てくる deriving (Generic) を使えるようにするためのスイッチです。これを使うと、JSONへの変換ルールなどを自動で作れるようになります。
 
 module MemoApp0529.Core (
   Memo(..),
@@ -50,6 +49,11 @@ data NewMemo = NewMemo {
   newMemoTitle   :: Text,
   newMemoContent :: Text
 } deriving (Show, Generic, Eq)
+
+{-
+これは、ユーザーが新しくメモを作成するときに送ってくるデータを表します。
+Memoとの違いは memoId がないことです。なぜなら、新しいメモのIDはユーザーが決めるのではなく、データベースが自動で割り振るからです。
+-}
 
 instance ToJSON NewMemo
 instance FromJSON NewMemo
