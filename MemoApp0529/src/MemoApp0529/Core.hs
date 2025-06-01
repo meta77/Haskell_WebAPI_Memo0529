@@ -44,6 +44,8 @@ Aesonというライブラリのおかげで、deriving (Generic) と書いて�
 ・FromJSON: JSON形式をHaskellのデータ型に変換します。
 -}
 
+--　データベースとの翻訳ルール
+-- sqlite-simple というライブラリが、このルールを使ってデータベースとやり取りします。
 -- SQLiteからの行データをMemo型に変換
 instance FromRow Memo where
   fromRow = Memo <$> field <*> field <*> field
