@@ -22,6 +22,9 @@ import Database.SQLite.Simple.ToRow
 import GHC.Generics (Generic)
 import Data.Text (Text)
 
+
+
+
 -- | メモの一意なID
 type MemoId = Int
 
@@ -44,6 +47,9 @@ Aesonというライブラリのおかげで、deriving (Generic) と書いて�
 ・FromJSON: JSON形式をHaskellのデータ型に変換します。
 -}
 
+
+
+
 --　データベースとの翻訳ルール
 -- sqlite-simple というライブラリが、このルールを使ってデータベースとやり取りします。
 -- SQLiteからの行データをMemo型に変換
@@ -53,6 +59,9 @@ instance FromRow Memo where
 -- Memo型をSQLiteの行データに変換 (IDは自動インクリメントなので挿入時は不要だが更新時に使用)
 instance ToRow Memo where
   toRow (Memo mId mTitle mContent) = toRow (mId, mTitle, mContent)
+
+
+
 
 -- | 新規作成時にIDを含まないメモのデータ型
 data NewMemo = NewMemo {
@@ -67,6 +76,9 @@ Memoとの違いは memoId がないことです。なぜなら、新しいメ�
 
 instance ToJSON NewMemo
 instance FromJSON NewMemo
+
+
+
 
 -- | データベースファイル名
 dbFile :: String
