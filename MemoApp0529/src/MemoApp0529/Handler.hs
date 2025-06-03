@@ -27,7 +27,7 @@ getConn = liftIO $ open dbFile
 createMemoHandler :: ActionM ()
 createMemoHandler = do
   b <- body -- body は、HTTPリクエストの「中身」（JSONなど）を取得する関数。
-  case eitherDecode b :: Either String NewMemo of
+  case eitherDecode b :: Either String NewMemo of -- eitherDecode は JSON の文字列（ByteString）を Haskell の型に変換する関数。Either String NewMemo は「変換に成功すれば Right NewMemo、失敗すれば Left String（エラー文字列）」を返す、という型注釈です。
     Left err -> do
       status status400
       json $ object ["error" .= ("Invalid JSON: " ++ err)]
