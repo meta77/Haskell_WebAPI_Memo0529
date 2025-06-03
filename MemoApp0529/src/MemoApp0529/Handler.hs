@@ -56,7 +56,7 @@ getMemosHandler = do
   json memos
 
 -- GET /memos/:id : 特定のメモを取得
-getMemoHandler :: ActionM ()
+getMemoHandler :: ActionM () -- ActionM () は「Webリクエストに対するアクション」で、() は「返り値が特にない（無視していい）」という意味。
 getMemoHandler = do
   memoIdParam <- param "id" :: ActionM MemoId
   conn <- getConn
