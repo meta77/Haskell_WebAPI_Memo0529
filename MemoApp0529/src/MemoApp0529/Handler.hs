@@ -26,7 +26,7 @@ getConn = liftIO $ open dbFile
 -- POST /memos : 新しいメモを作成
 createMemoHandler :: ActionM ()
 createMemoHandler = do
-  b <- body -- リクエストボディを取得
+  b <- body -- body は、HTTPリクエストの「中身」（JSONなど）を取得する関数。
   case eitherDecode b :: Either String NewMemo of
     Left err -> do
       status status400
