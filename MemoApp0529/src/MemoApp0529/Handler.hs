@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-} -- エラーメッセージ内の型注釈のため
 
+-- このモジュールは、外部からアクセスできる関数（ハンドラー）をまとめる
 module MemoApp0529.Handler (
   createMemoHandler,
   getMemosHandler,
