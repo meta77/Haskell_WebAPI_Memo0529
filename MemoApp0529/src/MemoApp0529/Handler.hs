@@ -19,7 +19,7 @@ import Network.HTTP.Types.Status
 
 import MemoApp0529.Core ( Memo(..), NewMemo(..), dbFile, MemoId )
 
--- DB接続を取得するヘルパー (リクエストごとに開閉)
+-- DB接続を取得するヘルパー (リクエストごとに開閉)。毎回この関数でデータベースに接続。
 getConn :: ActionM Connection
 getConn = liftIO $ open dbFile
 
