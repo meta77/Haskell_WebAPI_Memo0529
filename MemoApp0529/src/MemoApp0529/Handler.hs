@@ -43,8 +43,9 @@ createMemoHandler = do
       newId <- liftIO $ lastInsertRowId conn -- lastInsertRowId は直前に挿入されたデータのID（自動採番）を取得する関数。
       -- 作成されたメモを取得して返す
       createdMemos <- liftIO $ query conn "SELECT id, title, content FROM memos WHERE id = ?" (Only newId) :: ActionM [Memo]
-      liftIO $ close conn
       
+      liftIO $ close conn
+
       case createdMemos of
         [memo] -> do
           status status201
