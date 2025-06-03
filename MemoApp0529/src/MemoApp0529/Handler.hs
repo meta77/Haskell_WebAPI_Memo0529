@@ -32,13 +32,19 @@ createMemoHandler = do
       status status400
       json $ object ["error" .= ("Invalid JSON: " ++ err)]
     Right newMemo -> do -- JSONパースに成功した場合。newMemo という変数に、パースされたメモ（NewMemo型）が入る
-      conn <- getConn
+      conn <- getConn -- getConn は SQLite の接続を取得する自作の関数。conn に接続オブジェクトを入れる。
+
+      -- liftIO は「IO処理（データベース操作など）」を ActionM の中で使うための関数。execute は SQL を実行する関数（副作用だけで返り値はない）。
       liftIO $ execute conn "INSERT INTO memos (title, content) VALUES (?, ?)"
                         (newMemoTitle newMemo, newMemoContent newMemo)
-      newId <- liftIO $ lastInsertRowId conn
+
+
+      -- 登録が成功したか・内容が正しいかを再確認するため
+      newId <- liftIO $ lastInsertRowId conn -- lastInsertRowId は直前に挿入されたデータのID（自動採番）を取得する関数。
       -- 作成されたメモを取得して返す
       createdMemos <- liftIO $ query conn "SELECT id, title, content FROM memos WHERE id = ?" (Only newId) :: ActionM [Memo]
       liftIO $ close conn
+      
       case createdMemos of
         [memo] -> do
           status status201
