@@ -23,6 +23,9 @@ import MemoApp0529.Core ( Memo(..), NewMemo(..), dbFile, MemoId )
 getConn :: ActionM Connection
 getConn = liftIO $ open dbFile
 
+
+
+
 -- POST /memos : 新しいメモを作成
 createMemoHandler :: ActionM ()
 createMemoHandler = do
@@ -53,6 +56,11 @@ createMemoHandler = do
         _ -> do
           status status500
           json $ object ["error" .= ("Failed to retrieve created memo" :: String)]
+
+
+
+
+
 
 -- GET /memos : 全てのメモを取得
 getMemosHandler :: ActionM ()
