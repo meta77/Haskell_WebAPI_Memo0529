@@ -37,10 +37,10 @@ createMemoHandler = do
 
 
     Left err -> do -- eitherDecode が Left err を返した場合（＝パース失敗）。err は失敗の理由が入っている String 型
-      status status400
+      status status400 -- HTTPレスポンスのステータスを 400 に設定する
       -- status： Scotty（Webフレームワーク）で HTTP ステータスコードを設定する関数
       -- status400： Haskellの Network.HTTP.Types.Status モジュールから来ている定数で、HTTP 400 Bad Request を表す
-      
+
       json $ object ["error" .= ("Invalid JSON: " ++ err)]
     Right newMemo -> do -- JSONパースに成功した場合。newMemo という変数に、パースされたメモ（NewMemo型）が入る
       conn <- getConn -- getConn は SQLite の接続を取得する自作の関数。conn に接続オブジェクトを入れる。
