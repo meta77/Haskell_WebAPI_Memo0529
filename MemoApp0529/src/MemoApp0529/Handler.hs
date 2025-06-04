@@ -36,7 +36,7 @@ createMemoHandler = do
   -- eitherDecode :: FromJSON a => ByteString -> Either String a 　ゆえに、成功したら Right a を返す。失敗したら Left String を返す。返されるのは、まさに Either 型の「値」。
 
 
-    Left err -> do -- JSONパースに失敗した場合
+    Left err -> do -- eitherDecode が Left err を返した場合（＝パース失敗）。err は失敗の理由が入っている String 型
       status status400
       json $ object ["error" .= ("Invalid JSON: " ++ err)]
     Right newMemo -> do -- JSONパースに成功した場合。newMemo という変数に、パースされたメモ（NewMemo型）が入る
