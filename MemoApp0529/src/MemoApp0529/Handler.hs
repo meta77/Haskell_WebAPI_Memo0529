@@ -32,6 +32,9 @@ createMemoHandler = do
   b <- body -- body は、HTTPリクエストの「中身」（JSONなど）を取得する関数。b :: ByteString
   case eitherDecode b :: Either String NewMemo of -- eitherDecode は JSON の文字列（ByteString）を Haskell の型に変換する関数。
   -- :: Either String NewMemo は「変換に成功すれば Right NewMemo、失敗すれば Left String（エラー文字列）」を返す、という "型注釈 :: "です。
+  -- Either 型は Left エラー または Right 成功データ のどちらか。それに応じて分岐する。
+
+
 
 
     Left err -> do -- JSONパースに失敗した場合
