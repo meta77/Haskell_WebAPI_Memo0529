@@ -44,6 +44,7 @@ createMemoHandler = do
       json $ object ["error" .= ("Invalid JSON: " ++ err)]
       -- json は Scotty の関数で、Haskellの値を JSON に変換して返す
       -- object []　はAesonライブラリの関数。キーと値のペアで JSON オブジェクトを作る. 例：object ["key" .= value] → { "key": value } という JSON に変換される
+      -- err に入るのは、Aesonライブラリ（HaskellのJSON処理ライブラリ）が生成するエラーメッセージです。
 
 
     Right newMemo -> do -- JSONパースに成功した場合。newMemo という変数に、パースされたメモ（NewMemo型）が入る
