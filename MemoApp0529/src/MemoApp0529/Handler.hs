@@ -67,6 +67,8 @@ createMemoHandler = do
       ・第三引数：パラメータ（Only newId）で、? を置き換えるために使う
       -}
       -- Only は、1個だけのパラメータを包むときに使う
+      -- :: ActionM [Memo]　　　ActionM 型の中に [Memo] が入っている。
+      -- [Memo]の例　　[Memo 1 "title1" "content1", Memo 2 "title2" "content2"]
 
       liftIO $ close conn
 
