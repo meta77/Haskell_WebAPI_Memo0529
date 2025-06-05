@@ -52,7 +52,7 @@ createMemoHandler = do
 
       -- liftIO は「IO処理（データベース操作など）」を ActionM の中で使うための関数。execute は SQL を実行する関数（副作用だけで返り値はない）。
       liftIO $ execute conn "INSERT INTO memos (title, content) VALUES (?, ?)"
-                        (newMemoTitle newMemo, newMemoContent newMemo) -- newMemoTitle はフィールドアクセサ（ゲッター）です。
+                        (newMemoTitle newMemo, newMemoContent newMemo) -- newMemoTitleは、newMemoTitle型のフィールドアクセサ（ゲッター）です。
 
 
       -- 登録が成功したか・内容が正しいかを再確認するため
