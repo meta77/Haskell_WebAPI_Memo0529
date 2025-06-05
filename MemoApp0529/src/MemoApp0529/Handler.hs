@@ -66,6 +66,7 @@ createMemoHandler = do
       ・第二引数：SQL 文（"SELECT id, title, content FROM memos WHERE id = ?"）
       ・第三引数：パラメータ（Only newId）で、? を置き換えるために使う
       -}
+      -- Only は、1個だけのパラメータを包むときに使う
 
       liftIO $ close conn
 
