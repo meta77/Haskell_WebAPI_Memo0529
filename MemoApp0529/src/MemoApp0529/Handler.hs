@@ -27,7 +27,7 @@ getConn = liftIO $ open dbFile
 
 
 -- POST /memos : 新しいメモを作成
-createMemoHandler :: ActionM ()
+createMemoHandler :: ActionM () -- Webリクエストに対して何らかの処理を行うが、処理の結果（値）は外に返さない。副作用だけを行う。
 createMemoHandler = do
   b <- body -- body は、HTTPリクエストの「中身」（JSONなど）を取得する関数。b :: ByteString
   case eitherDecode b :: Either String NewMemo of -- eitherDecode は JSON の文字列（ByteString）を Haskell の型に変換する関数。
