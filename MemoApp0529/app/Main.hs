@@ -19,7 +19,7 @@ main = do
 
     -- APIエンドポイントのルーティング
     post "/memos" H.createMemoHandler
-    get "/memos" H.getMemosHandler
+    get "/memos" H.getMemosHandler -- get :: RoutePattern -> ActionM () -> ScottyM ()
     get "/memos/:id" H.getMemoHandler
     put "/memos/:id" H.updateMemoHandler
     delete "/memos/:id" H.deleteMemoHandler
