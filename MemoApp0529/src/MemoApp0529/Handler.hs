@@ -24,8 +24,6 @@ getConn :: ActionM Connection -- 「Webリクエスト文脈でデータベー�
 getConn = liftIO $ open dbFile -- liftIO により、IO Connection を ActionM Connection に変換
 
 
-
-
 -- POST /memos : 新しいメモを作成
 createMemoHandler :: ActionM () -- Webリクエストに対して何らかの処理を行うが、処理の結果（値）は外に返さない。副作用だけを行う。
 createMemoHandler = do
@@ -90,6 +88,7 @@ getMemosHandler :: ActionM ()
 getMemosHandler = do
   conn <- getConn
   memos <- liftIO $ query_ conn "SELECT id, title, content FROM memos" :: ActionM [Memo]
+  -- liftIO 通常の IO 処理を、ActionM モナドの中で使えるように**「持ち上げる」**関数。
   liftIO $ close conn
   json memos
 
