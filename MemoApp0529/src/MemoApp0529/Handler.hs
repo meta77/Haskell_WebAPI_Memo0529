@@ -90,7 +90,13 @@ getMemosHandler = do
   memos <- liftIO $ query_ conn "SELECT id, title, content FROM memos" :: ActionM [Memo]
   -- liftIO 通常の IO 処理を、ActionM モナドの中で使えるように**「持ち上げる」**関数。
   liftIO $ close conn
-  json memos
+  json memos -- memos は [Memo] 型のリスト（データベースから取得した全メモ）。json 関数は、それを JSON形式でHTTPレスポンスとして返す関数。
+
+
+
+
+
+
 
 -- GET /memos/:id : 特定のメモを取得
 getMemoHandler :: ActionM () -- ActionM () は「Webリクエストに対するアクション」で、() は「返り値が特にない（無視していい）」という意味。
