@@ -88,11 +88,17 @@ getMemosHandler :: ActionM ()
 getMemosHandler = do
   conn <- getConn
   memos <- liftIO $ query_ conn "SELECT id, title, content FROM memos" :: ActionM [Memo]
-  -- liftIO 通常の IO 処理を、ActionM モナドの中で使えるように**「持ち上げる」**関数。
+  -- liftIO 通常の IO 処理を、ActionM モナドの中で使えるように「持ち上げる」関数。
+  -- IO [Memo] を ActionM [Memo] に変換
   liftIO $ close conn
   json memos -- memos は [Memo] 型のリスト（データベースから取得した全メモ）。json 関数は、それを JSON形式でHTTPレスポンスとして返す関数。
 
+{-
+liftIO :: IO a -> m a
 
+「通常の IO 処理を、他のモナド（たとえば ActionM）の中で使うために「持ち上げる（lift）」」のが liftIO
+SQLiteの操作は全部 IO 型の処理ですが、Scotty の中（ActionM モナド）で使うには liftIO が必要です。
+-}
 
 
 
