@@ -120,6 +120,11 @@ getMemoHandler = do
       status status500
       json $ object ["error" .= ("Multiple memos found with the same ID" :: String)]
 
+
+
+
+
+
 -- PUT /memos/:id : 特定のメモを更新
 updateMemoHandler :: ActionM ()
 updateMemoHandler = do
@@ -149,6 +154,9 @@ updateMemoHandler = do
           _ -> do
             status status500 -- 更新は成功したが取得に失敗した場合
             json $ object ["error" .= ("Failed to retrieve updated memo" :: String)]
+
+
+
 
 -- DELETE /memos/:id : 特定のメモを削除
 deleteMemoHandler :: ActionM ()
