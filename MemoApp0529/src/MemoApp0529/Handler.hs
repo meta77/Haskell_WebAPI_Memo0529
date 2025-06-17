@@ -105,7 +105,7 @@ SQLiteの操作は全部 IO 型の処理ですが、Scotty の中（ActionM モ�
 
 
 -- GET /memos/:id : 特定のメモを取得
-getMemoHandler :: ActionM () -- ActionM () は「Webリクエストに対するアクション」で、() は「返り値が特にない（無視していい）」という意味。
+getMemoHandler :: ActionM ()
 getMemoHandler = do
   memoIdParam <- param "id" :: ActionM MemoId
   conn <- getConn
