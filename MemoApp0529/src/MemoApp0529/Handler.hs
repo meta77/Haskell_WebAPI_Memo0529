@@ -96,7 +96,7 @@ getMemosHandler = do
 {-
 liftIO :: IO a -> m a
 
-「通常の IO 処理を、他のモナド（たとえば ActionM）の中で使うために「持ち上げる（lift）」」のが liftIO
+通常の IO 処理を、他のモナド（たとえば ActionM）の中で使うために「持ち上げる（lift）」
 SQLiteの操作は全部 IO 型の処理ですが、Scotty の中（ActionM モナド）で使うには liftIO が必要です。
 -}
 
