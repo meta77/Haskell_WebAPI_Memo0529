@@ -111,6 +111,8 @@ getMemoHandler = do
   {-
   param :: Parsable a => Text -> ActionM a
 
+  Parsable a =>
+　　　　型クラス制約
   -}
 
   conn <- getConn
