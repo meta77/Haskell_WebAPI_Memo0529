@@ -108,6 +108,11 @@ SQLiteの操作は全部 IO 型の処理ですが、Scotty の中（ActionM モ�
 getMemoHandler :: ActionM ()
 getMemoHandler = do
   memoIdParam <- param "id" :: ActionM MemoId
+  {-
+  param :: Parsable a => Text -> ActionM a
+
+  -}
+
   conn <- getConn
   memos <- liftIO $ query conn "SELECT id, title, content FROM memos WHERE id = ?" (Only memoIdParam) :: ActionM [Memo]
   liftIO $ close conn
