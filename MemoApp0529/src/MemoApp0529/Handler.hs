@@ -146,6 +146,7 @@ updateMemoHandler = do
       status status400
       json $ object ["error" .= ("Invalid JSON: " ++ err)]
     Right memoToUpdate -> do
+      -- ※　`memoToUpdate`は値の名前。自由につけていい。型はNewMemo。
       conn <- getConn
       -- 先に存在確認
       existingMemos <- liftIO $ query conn "SELECT id FROM memos WHERE id = ?" (Only memoIdParam) :: ActionM [Only MemoId]
