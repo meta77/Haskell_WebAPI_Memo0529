@@ -141,7 +141,7 @@ updateMemoHandler = do
   body :: ActionM ByteString
   戻り値は、ActionM モナドの中に入った ByteString（バイナリ文字列）
   -}
-  case eitherDecode b :: Either String NewMemo of -- 更新時もタイトルと本文を受け取る
+  case eitherDecode b :: Either String NewMemo of
     Left err -> do
       status status400
       json $ object ["error" .= ("Invalid JSON: " ++ err)]
