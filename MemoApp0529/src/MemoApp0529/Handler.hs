@@ -137,6 +137,9 @@ updateMemoHandler :: ActionM ()
 updateMemoHandler = do
   memoIdParam <- param "id" :: ActionM MemoId
   b <- body
+  {-
+  body :: ActionM ByteString
+  -}
   case eitherDecode b :: Either String NewMemo of -- 更新時もタイトルと本文を受け取る
     Left err -> do
       status status400
